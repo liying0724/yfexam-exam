@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yf.exam.modules.sys.echart.mapper.EchartMapper">
+
+    <select id="getChartPieDate" resultType="com.yf.exam.modules.sys.echart.dto.EchartResponseDTO"
+                    parameterType="com.yf.exam.modules.sys.echart.dto.EchartDTO">
+        select
+            DATE_FORMAT(create_time,'%Y-%m-%d') as name,count(id) as value
+        from
+            el_user_exam
+         where 1= 1
+         <if test="reqDTO.startDate != null">
+            and create_time >= #{reqDTO.startDate}
+         </if>
+
+        <if test="reqDTO.endDate != null">
+            and create_time &lt;= #{reqDTO.endDate}
+        </if>
+        <if test="reqDTO.endDate == null and reqDTO.startDate == null">
+           and create_time BETWEEN #{reqDTO.startDate} and #{reqDTO.endDate}
+        </if>
+         group by name
+         order by name asc
+
+    </select>
+    <select id="getChartLineDate" resultType="com.yf.exam.modules.sys.echart.dto.EchartResponseDTO">
+
+    </select>
+
+</mapper>

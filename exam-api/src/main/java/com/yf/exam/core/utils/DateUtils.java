@@ -14,7 +14,35 @@ import java.util.GregorianCalendar;
  * @version
  */
 public class DateUtils {
-	
+
+	private DateUtils() {
+	}
+
+	public static final String PATTERN_STANDARD = "yyyy-MM-dd HH:mm:ss";
+	public static final String PATTERN_STANDARD_NOT_SECOND = "yyyy-MM-dd HH:mm";
+	public static final String PATTERN_STANDARD_SLANT = "yyyy/MM/dd HH:mm:ss";
+	public static final String PATTERN_SLANT_NOT_SECOND = "yyyy/MM/dd HH:mm";
+	public static final String PATTERN_SLANT = "yyyy/MM/dd";
+	public static final String PATTERN_YYYYMMDD = "yyyyMMdd";
+	public static final String PATTERN_DATE_YYYYMM = "yyyyMM";
+	public static final String PATTERN_DATE = "yyyy-MM-dd";
+	public static final String STR_DEST_NULL = "str dest null";
+	public static final String PATTERN_TIME = "HH:mm:ss";
+	public static final String PATTERN_NO_COLON = "yyyyMMddHHmmss";
+	public static final String PATTERN_MMddHH = "MMddHH";
+	public static final String PATTERN_MS = "yyyy-MM-dd HH:mm:ss.SSS";
+	public static final String PATTERN_YYYY_MM = "yyyy-MM";
+	public static final long ONE_DAY = 86400000L;
+	private static final long ONE_HOUR = 3600000L;
+	public static final long ONE_HALF_HOUR = 1800000L;
+	public static final long ONE_MINUTE = 60000L;
+	public static final long ONE_SECOND = 1000L;
+	public static final String ZERO_HOUR_STR = " 00:00:00";
+	public static final String TWENTY_FOUR_HOUR_STR = " 23:59:59";
+	private static final String[] DATE_PATTERNS = new String[]{"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM/dd", "yyyyMMdd", "yyyy-MM-dd", "HH:mm:ss", "yyyyMMddHHmmss", "MMddHH", "yyyy-MM-dd HH:mm:ss.SSS"};
+	public static final String[] HOUR24_LIST = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"};
+	public static final String[] HOUR23_LIST = new String[]{"0", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "23"};
+
 	/**
 	 * 
 	 * calcExpDays:计算某个日期与当前日期相差的天数，如果计算的日期大于现在时间，将返回负数；否则返回正数 <br/>

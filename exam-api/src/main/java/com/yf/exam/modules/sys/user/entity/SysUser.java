@@ -79,5 +79,7 @@ public class SysUser extends Model<SysUser> {
      * 状态
      */
     private Integer state;
-    
+
+    @TableField("avatar")
+    private String avatar;
 }

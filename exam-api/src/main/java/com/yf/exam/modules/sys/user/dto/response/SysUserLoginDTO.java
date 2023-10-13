@@ -51,5 +51,7 @@ public class SysUserLoginDTO implements Serializable {
 
     @ApiModelProperty(value = "登录令牌", required=true)
     private String token;
-    
+
+    @ApiModelProperty(value = "用户头像", required=true)
+    private String avatar;
 }

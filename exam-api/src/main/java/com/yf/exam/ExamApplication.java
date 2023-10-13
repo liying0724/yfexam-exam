@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.net.InetAddress;
@@ -20,6 +21,7 @@ import java.util.List;
  * @date 2020-03-04 19:41
  */
 @Log4j2
+@EnableScheduling
 @SpringBootApplication
 public class ExamApplication implements WebMvcConfigurer {
 
