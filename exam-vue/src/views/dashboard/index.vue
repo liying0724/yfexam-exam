@@ -1,136 +1,186 @@
 <template>
-  <div class="app-container">
-    <el-row :gutter="20">
-      <el-col :span="16">
-        <el-card class="box">
-          <div slot="header" class="clearfix">
-            <span>项目信息</span>
-            <el-button style="float: right; padding: 3px 0; font-size: 12px" type="text">系统版本：{{ version }}</el-button>
+  <div id = "data-analysis">
+
+    <el-row :gutter="20" type="flex" style = "margin-top: 10px">
+      <el-col :span="6" :offset="3">
+        <el-card class="box-card">
+          <h3>本月考试人数</h3>
+          <div>
+            <i class="el-icon-s-shop" style="color: purple"></i>
+            <span>2424132</span>
           </div>
-
-          <div style="line-height: 32px;">
-
-            <div class="title" style="padding-top: 0px">系统介绍</div>
-            云帆考试系统是一款基于SpringBoot+Vue开发的考试系统。包含在线考试、用户体系、错题训练、考试规则、智能算分等考试功能，流程通畅。
-
-            <div class="title">技术栈</div>
-            <div class="tags">
-              <el-tag>SpringBoot</el-tag>
-              <el-tag>Shiro</el-tag>
-              <el-tag>MyBatis Plus</el-tag>
-              <el-tag>Redis</el-tag>
-              <el-tag>JWT</el-tag>
-              <el-tag>Vue</el-tag>
-              <el-tag>Vue2</el-tag>
-              <el-tag>ElementUI</el-tag>
-            </div>
-
-            <div class="title">产品功能</div>
-            <div>
-              <div>系统完善：完善的前后端分离架构、规范的接口文档</div>
-              <div>权限控制：基于Shiro和JWT开发的权限控制功能。</div>
-              <div>基础功能：系统配置、用户管理、部门管理、角色管理等。</div>
-              <div>题库管理：支持单选题、多选题、判断题、支持试题批量导入导出</div>
-              <div>考试权限：支持指定考试范围：完全公开、指定某些部门人员考试</div>
-              <div>在线考试：学员在线考试、查看分数、考试错题训练。</div>
-            </div>
-
-          </div>
-
         </el-card>
       </el-col>
-      <el-col :span="8">
-
-        <el-card class="box">
-          <div slot="header" class="clearfix">
-            <span>支持信息</span>
-          </div>
-
+      <el-col :span="6">
+        <el-card class="box-card">
+          <h3>本月新增考试课程数</h3>
           <div>
-
-            <div class="title" style="padding-top: 0px">商业咨询</div>
-            <div style="display: flex;">
-              <div style="flex-grow: 1;">
-                <div>微信：gyh_yinzi（微信号）或搜索手机18603038204</div>
-                <div>手机：<a href="tel:18603038204">18603038204（郭女士）</a></div>
-                <div>邮箱：<a href="mailto:835487894@qq.com">835487894@qq.com</a> </div>
-              </div>
-              <div style="width: 120px; display: flex; align-items: center; flex-direction: column; align-content: flex-end">
-                <img style="width: 100px; height: 100px" src="@/assets/contact.png" >
-                <div style="font-size: 12px; text-align: center; width: 100%">微信扫码加我好友</div>
-              </div>
-
-            </div>
-
-            <div class="title">支持网站</div>
-            <div>
-              <div>企业官网：<a href="https://www.yfhl.net" target="_blank">https://www.yfhl.net</a></div>
-              <div>在线试用：<a href="https://exam.yfhl.net" target="_blank">https://exam.yfhl.net</a></div>
-            </div>
-
-            <div class="title">在线试用</div>
-            <div style="display: flex; align-items: center">
-              <img src="@/assets/h5.png" style="width: 150px; height: 150px; border: #efefef 1px solid">
-              <img src="@/assets/mp.jpg" style="width: 150px; height: 150px; border: #efefef 1px solid; margin-left: 20px">
-            </div>
-
+            <i class="el-icon-s-shop" style="color: purple"></i>
+            <span>2424132</span>
           </div>
-
         </el-card>
-
+      </el-col>
+      <el-col :span="6">
+        <el-card class="box-card">
+          <h3>本月考试通过人数</h3>
+          <div>
+            <i class="el-icon-s-shop" style="color: purple"></i>
+            <span>2424132</span>
+          </div>
+        </el-card>
       </el-col>
     </el-row>
+
+    <el-row :gutter="20" type="flex">
+      <el-col :span = "15">
+        <el-card>
+          <div slot="header"><span><i class="el-icon-pie-chart"></i> 每日考试人数统计</span></div>
+          <div class="el-table el-table--enable-row-hover el-table--medium">
+            <div ref="pieChart" style="height: 400px" />
+          </div>
+        </el-card>
+      </el-col>
+
+      <el-col :span = "9">
+        <el-card>
+          <div slot="header"><span><i class="el-icon-stopwatch"></i> 每日新增考试课程数</span></div>
+          <div class="el-table el-table--enable-row-hover el-table--medium">
+            <div ref="lineChart" style="height: 200px" />
+          </div>
+        </el-card>
+
+        <el-card>
+          <div slot="header"><span><i class="el-icon-odometer"></i> 每日考试通过人数</span></div>
+          <div class="el-table el-table--enable-row-hover el-table--medium">
+            <div ref="raddarChart" style="height: 200px" />
+          </div>
+        </el-card>
+      </el-col>
+
+    </el-row>
   </div>
+
 </template>
-
 <script>
-import { mapGetters } from 'vuex'
-import config from '../../../package.json'
+  import { getChartDate } from "@/api/chart/echart";
+  import * as echarts from "echarts";
+  export default {
+    name: 'Dashboard',
+    components: {
 
-export default {
-  name: 'Dashboard',
-  data() {
-    return {
-      currentRole: 'adminDashboard',
-      version: config.version
+    },
+    created() {
+      this.getList();
+    },
+    data() {
+      return {
+        pieChart: null,
+        lineChart: null,
+        raddarChart: null,
+        echartDate: []
+      }
+    },
+
+    methods: {
+      /** 查缓存询信息 */
+      getList() {
+        getChartDate().then((response) => {
+          this.echartDate = response.data;
+
+          this.pieChart = echarts.init(this.$refs.pieChart, "macarons");
+          this.pieChart.setOption({
+            tooltip: {
+              trigger: "item",
+              formatter: "{a} <br/>{b} : {c} ({d}%)",
+            },
+            series: [
+              {
+                name: "人数",
+                type: "pie",
+                roseType: "radius",
+                radius: [15, 95],
+                center: ["50%", "38%"],
+                data: response.data.pieDate,
+                animationEasing: "cubicInOut",
+                animationDuration: 1000,
+              }
+            ]
+          });
+
+          this.lineChart = echarts.init(this.$refs.lineChart, "macarons");
+          this.lineChart.setOption({
+            xAxis: {
+              type: 'category',
+              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+              type: 'value'
+            },
+
+            series: [
+              {
+                data: [
+                  {
+                    data: this.echartDate.lineDate,
+                    type: 'line',
+                    smooth: true,
+                    name: "人数"
+                  }
+                ]
+              }
+            ]
+          });
+          this.raddarChart = echarts.init(this.$refs.raddarChart, "macarons");
+          this.raddarChart.setOption({
+            tooltip: {
+              formatter: "{b} <br/>{a} : " + this.cache.info.used_memory_human,
+            },
+            series: [
+              {
+                name: "峰值",
+                type: "gauge",
+                min: 0,
+                max: 1000,
+                detail: {
+                  formatter: this.cache.info.used_memory_human,
+                },
+                data: [
+                  {
+                    value: parseFloat(this.cache.info.used_memory_human),
+                    name: "内存消耗",
+                  }
+                ]
+              }
+            ]
+          });
+        });
+      },
+
     }
-  },
-  computed: {
-    ...mapGetters([
-      'roles',
-      'siteData'
-    ])
-  },
-  created() {
-
   }
-}
 </script>
+<style lang="scss" scoped>
+  .dashboard-editor-container {
+    padding: 32px;
+    background-color: rgb(240, 242, 245);
+    position: relative;
 
-<style scoped>
-.box{
-  height: calc(100vh - 120px);
-  font-size: 14px;
-  line-height: 28px;
-}
-.title{
-  font-size: 18px;
-  font-weight: 700;
-  padding-bottom: 10px;
-  padding-top: 20px;
-  margin-bottom: 10px;
-  border-bottom: #eee 1px dotted;
-}
+    .chart-wrapper {
+      background: #4f6d74;
+      padding: 16px 16px 0;
+      margin-bottom: 32px;
+    }
+  }
 
-.tags span{
-  margin-right: 10px;
-}
+  @media (max-width:1024px) {
+    .chart-wrapper {
+      padding: 8px;
+    }
+  }
 
-.box a{
-  color: #20a0ff;
-}
+  .el-card{
+    margin-bottom: 20px;
+    text-align: center;
+  }
 
-.box a:hover{
-  color: #ff0000;
-}
 </style>
