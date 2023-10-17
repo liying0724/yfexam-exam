@@ -5,7 +5,7 @@
     <select id="getChartPieDate" resultType="com.yf.exam.modules.sys.echart.dto.EchartResponseDTO"
                     parameterType="com.yf.exam.modules.sys.echart.dto.EchartDTO">
         select
-            DATE_FORMAT(create_time,'%Y-%m-%d') as name,count(id) as value
+        DATE_FORMAT(create_time, '%Y-%m-%d') as createDate,count(id) as value
         from
             el_user_exam
          where 1= 1
@@ -19,12 +19,66 @@
         <if test="reqDTO.endDate == null and reqDTO.startDate == null">
            and create_time BETWEEN #{reqDTO.startDate} and #{reqDTO.endDate}
         </if>
-         group by name
-         order by name asc
+        GROUP BY createDate
+        order by createDate asc
 
     </select>
     <select id="getChartLineDate" resultType="com.yf.exam.modules.sys.echart.dto.EchartResponseDTO">
+        SELECT
+            DATE_FORMAT( create_time, '%Y-%m-%d' ) AS createDate,
+            count( id ) AS
+        VALUE
 
+        FROM
+            el_user_exam
+        WHERE
+            passed = 0
+        <if test="reqDTO.startDate != null">
+            and create_time >= #{reqDTO.startDate}
+        </if>
+        <if test="reqDTO.endDate != null">
+            and create_time &lt;= #{reqDTO.endDate}
+        </if>
+        <if test="reqDTO.endDate == null and reqDTO.startDate == null">
+            create_time BETWEEN #{reqDTO.startDate} and  #{reqDTO.endDate}
+        </if>
+
+        GROUP BY
+            createDate
+        order by
+            createDate
+        asc
+	 </select>
+    <select id="getChartBarDate" resultType="com.yf.exam.modules.sys.echart.dto.EchartResponseDTO">
+            SELECT
+                DATE_FORMAT( create_time, '%Y-%m-%d' ) AS createDate,
+                MAX( max_score ) as value
+            FROM
+                el_user_exam
+            where 1= 1
+            <if test="reqDTO.startDate != null">
+                and create_time >= #{reqDTO.startDate}
+            </if>
+            <if test="reqDTO.endDate != null">
+                and create_time &lt;= #{reqDTO.endDate}
+            </if>
+            <if test="reqDTO.endDate == null and reqDTO.startDate == null">
+                create_time BETWEEN #{reqDTO.startDate} and  #{reqDTO.endDate}
+            </if>
+            GROUP BY
+                createDate
+    </select>
+    <select id="getCourseCount" resultType="java.lang.Integer">
+        select count(1) from el_repo where 1 = 1
+        <if test="reqDTO.startDate != null">
+            and create_time >= #{reqDTO.startDate}
+        </if>
+        <if test="reqDTO.endDate != null">
+            and create_time &lt;= #{reqDTO.endDate}
+        </if>
+        <if test="reqDTO.endDate == null and reqDTO.startDate == null">
+            create_time BETWEEN #{reqDTO.startDate} and  #{reqDTO.endDate}
+        </if>
     </select>
 
 </mapper>

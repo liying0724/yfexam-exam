@@ -7,9 +7,11 @@ import java.util.List;
 @Data
 public class EchartResponseDTO {
 
-    private String name;
+    private String createDate;
 
-    private Integer value;
+    private Long value;
+
+    private String name;
 
     private List<EchartResponseDTO> echartResponseDTOList;
 }

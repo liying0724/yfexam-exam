@@ -1,6 +1,8 @@
 package com.yf.exam.core.utils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -51,7 +53,7 @@ public class DateUtils {
 	 * @return
 	 * @since JDK 1.6
 	 */
-	public static int calcExpDays(Date userCreateTime){
+	public static int calcDiffDays(Date userCreateTime){
 		
 		Calendar start = Calendar.getInstance();
 		start.setTime(userCreateTime);
@@ -64,7 +66,51 @@ public class DateUtils {
 		return days;
 	}
 
+	/**
+	 *
+	 * calcExpDays:计算某个日期与当前日期相差的天数，如果计算的日期大于现在时间，将返回负数；否则返回正数 <br/>
+	 * @author Bool
+	 * @param userCreateTime
+	 * @return
+	 * @since JDK 1.6
+	 */
+	public static int calcDiffDays(Date userCreateTime, Date startDate){
 
+		Calendar end = Calendar.getInstance();
+		end.setTime(userCreateTime);
+
+		Calendar start = Calendar.getInstance();
+		start.setTime(startDate);
+
+		long l = end.getTimeInMillis() - start.getTimeInMillis();
+		int days = new Long(l / (1000 * 60 * 60 * 24)).intValue();
+		return days;
+	}
+	/**
+	 *
+	 * calcExpDays:计算某个日期与当前日期相差的天数，如果计算的日期大于现在时间，将返回负数；否则返回正数 <br/>
+	 * @author Bool
+	 * @param endTime
+	 * @return
+	 * @since JDK 1.6
+	 */
+	public static int calcDiffDays(String endTime, String startTime) {
+		LocalDate end = LocalDate.parse(endTime);
+		LocalDate start = LocalDate.parse(startTime);
+		Period between = Period.between(start, end);
+		return between.getDays();
+	}
+	/**
+	 * 获取本月第一天
+	 * @return String
+	 **/
+	public static Date getMonthStart() {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, 0);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		Date time = cal.getTime();
+		return time;
+	}
 	/**
 	 * 
 	 * dateNow:获取当前时间的字符串格式，根据传入的格式化来展示. <br/>

@@ -12,5 +12,9 @@ public interface EchartMapper  extends BaseMapper<SysDepart> {
 
     List<EchartResponseDTO> getChartPieDate(@Param("reqDTO") EchartDTO reqDTO);
 
-    List<EchartResponseDTO> getChartLineDate(EchartDTO reqDTO);
+    List<EchartResponseDTO> getChartLineDate(@Param("reqDTO") EchartDTO reqDTO);
+
+    List<EchartResponseDTO> getChartBarDate(@Param("reqDTO") EchartDTO reqDTO);
+
+    int getCourseCount(@Param("reqDTO") EchartDTO reqDTO);
 }
