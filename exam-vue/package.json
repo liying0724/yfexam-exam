@@ -1,7 +1,7 @@
 {
   "name": "yf-exam-lite",
   "version": "1.9.2",
-  "description": "云帆学习考试系统",
+  "description": "在线学习考试系统",
   "author": "18365918@qq.com",
   "scripts": {
     "dev": "vue-cli-service serve",
